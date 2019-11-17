@@ -19,6 +19,6 @@ public class GestoreTesti : MonoBehaviour
     void Update()
     {
         nProiettili.text = "" + mirino.bullets + "";
-        score.text = "" + Mirino.score + "";
+        score.text = "" + mirino.score + "";
     }
 }

@@ -24,6 +24,14 @@ public class RandomSpawn : MonoBehaviour
     public Vector2 PercBonus;
     public Vector2 PercMalus;
 
+
+    public AudioSource As;
+    public AudioClip acNormale;
+    public AudioClip acBonus;
+    public AudioClip acMalus;
+
+    public Vector3 _TestVector;
+
     public float distanzaDalloSpawn = 5;
 
     private void Start()
@@ -47,14 +55,18 @@ public class RandomSpawn : MonoBehaviour
 
     void SpawnaPaperaBonus()
     {
-
+        As.clip = acBonus;
+        As.Play();
         GameObject PaperaB = PapereBonus[Random.Range(0, PapereBonus.Length)];
 
         transform.rotation = Quaternion.Euler(Random.Range(rangeMin, rangeMax), 0, 0);
 
         GameObject PaperaBInstance = Instantiate(PaperaB,transform.position + transform.up * distanzaDalloSpawn, Quaternion.Euler(transform.forward));
 
-        Debug.Log(this.transform.rotation.x);
+       // Debug.Log(this.transform.rotation.x);
+
+        PaperaB.GetComponentInChildren<Renderer>().sharedMaterials[1].color = Color.white;
+        //PaperaB.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
         PaperaBInstance.transform.LookAt(PaperaBInstance.transform.position + transform.up, Vector3.up);
 
@@ -62,7 +74,8 @@ public class RandomSpawn : MonoBehaviour
 
     void SpawnaPaperaNormale()
     {
-
+        As.clip = acNormale;
+        As.Play();
         GameObject PaperaN = PapereNormali[Random.Range(0, PapereNormali.Length)];
 
         transform.rotation = Quaternion.Euler(Random.Range(rangeMin, rangeMax), 0, 0);
@@ -75,11 +88,16 @@ public class RandomSpawn : MonoBehaviour
 
     void SpawnaPaperaMalus()
     {
+        As.clip = acMalus;
+        As.Play();
         GameObject PaperaM = PapereMalus[Random.Range(0, PapereMalus.Length)];
 
         transform.rotation = Quaternion.Euler(Random.Range(rangeMin, rangeMax), 0, 0);
 
         GameObject PaperaMInstance = Instantiate(PaperaM, transform.position + transform.up * distanzaDalloSpawn, Quaternion.Euler(transform.forward));
+
+        PaperaM.GetComponentInChildren<Renderer>().sharedMaterials[1].color = Color.yellow;
+        PaperaM.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
         PaperaMInstance.transform.LookAt(PaperaMInstance.transform.position + transform.up, Vector3.up);
 
@@ -95,7 +113,7 @@ public class RandomSpawn : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SpawnaPaperaBonus();
+            SpawnaPaperaMalus();
 
         }
 

@@ -10,6 +10,8 @@ public class Duck : MonoBehaviour
     public LevelManager levelManager;
     public Mirino mirino;
     public Animator anim;
+    public AudioClip morte,colpita;
+    public AudioSource As;
 
     public enum TIPI_DI_PAPERE
     {
@@ -20,28 +22,31 @@ public class Duck : MonoBehaviour
 
     public void Awake()
     {
-        levelManager = FindObjectOfType<LevelManager>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         anim = GetComponent<Animator>();
         if ( anim == null)
         {
             anim = GetComponentInChildren<Animator>();
         }
-        mirino = FindObjectOfType<Mirino>();
+        mirino = GameObject.Find("Mirino").GetComponent<Mirino>();
         head = GetComponentInChildren<DuckHead>();
         if ( head != null )
         {
             head.owner = this;
-        }
-        
+        }     
     }
     public void Danneggia(int damage)
     {
         vita -= damage;
         anim.SetTrigger("Presa");
 
+        As.clip = colpita;
+        As.Play();
+
         if (vita <= 0)           
         {
-           
+            As.clip = morte;
+            As.Play();
             anim.SetTrigger("Morta");
             Destroy(this.gameObject.GetComponent<Collider>());
             if (head != null)
@@ -49,16 +54,12 @@ public class Duck : MonoBehaviour
                 Destroy(head.GetComponent<Collider>());
 
             }
-
-
             if (tipo == TIPI_DI_PAPERE.RIGHT_DUCK)
             {
                 mirino.numeroPapere -= 1;
-                levelManager.DuckCheck();
+                //levelManager.DuckCheck();
 
             }
-            
-
         }
     }
    

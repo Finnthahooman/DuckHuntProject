@@ -22,7 +22,7 @@ public class DuckTrigger : MonoBehaviour
             if (duck.tipo == Duck.TIPI_DI_PAPERE.RIGHT_DUCK)
             {
                 mirino.numeroPapere -= 1;
-                levelManager.DuckCheck();
+                //levelManager.DuckCheck();
 
             }     
         }

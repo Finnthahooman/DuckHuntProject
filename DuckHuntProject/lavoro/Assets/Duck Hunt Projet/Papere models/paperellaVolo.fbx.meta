@@ -27,7 +27,7 @@ ModelImporter:
     importAnimatedCustomProperties: 0
     importConstraints: 0
     animationCompression: 1
-    animationRotationError: 0.5
+    animationRotationError: 90
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
@@ -46,7 +46,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -66,7 +66,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 15
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -112,7 +112,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 15
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

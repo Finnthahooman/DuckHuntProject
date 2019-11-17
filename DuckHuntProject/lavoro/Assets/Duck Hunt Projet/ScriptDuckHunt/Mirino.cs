@@ -13,7 +13,7 @@ public class Mirino : MonoBehaviour
     public Camera cam;
     public GameObject arma;
     public int maxDistance = 5;
-    public static int score = 0;
+    public int score = 0;
     
     public int bullets = 60;
  
@@ -22,7 +22,6 @@ public class Mirino : MonoBehaviour
 
     private void Awake()
     {
-
         cam = Camera.main;
     }
 
@@ -73,10 +72,7 @@ public class Mirino : MonoBehaviour
              
                 }
            }
-            
-        
 
-        
     }
 
     public void DanneggiaPapera(Duck duck, int damage, float pointsMultiplier = 1)
@@ -84,7 +80,7 @@ public class Mirino : MonoBehaviour
         duck.Danneggia(damage);
         if (duck.tipo == Duck.TIPI_DI_PAPERE.RIGHT_DUCK)
         {
-            score += Mathf.RoundToInt( scorePerDuck * pointsMultiplier );
+            score += Mathf.RoundToInt(scorePerDuck * pointsMultiplier);
         }
         else if (duck.tipo == Duck.TIPI_DI_PAPERE.WRONG_DUCK)
         {
@@ -100,8 +96,10 @@ public class Mirino : MonoBehaviour
 
     private void OnGUI()
     {
+        /*
         GUI.Label(new Rect(10f, 10f, 150f, 20f), "punteggio: " + score );
         GUI.Label(new Rect(10f, 40f, 150f, 20f), "proiettili: " + bullets);
         GUI.Label(new Rect(10f, 70f, 150f, 20f), "papere rimaste: " + numeroPapere);
+        */
     }
 }

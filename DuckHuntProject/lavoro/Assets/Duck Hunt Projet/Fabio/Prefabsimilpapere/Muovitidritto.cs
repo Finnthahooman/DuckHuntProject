@@ -7,16 +7,22 @@ public class Muovitidritto : MonoBehaviour
 
     public float velocita = 5;
     public float velocitaCaduta = 5;
-    public Vector3 rOffset;
+    public bool isPulcino;
+    public Vector3 rOffset,pOffset;
 
     private void Update()
     {
         int SDuck = GetComponent<Duck>().vita;
 
-        transform.localPosition += transform.forward * velocita * Time.deltaTime;
+        //transform.localPosition += transform.forward * velocita * Time.deltaTime;
 
         if (SDuck > 0)
         {
+            if (isPulcino)
+            {
+                transform.localPosition += pOffset * velocita * Time.deltaTime;
+            }
+            else
 
             transform.localPosition += transform.forward * velocita * Time.deltaTime;
 
