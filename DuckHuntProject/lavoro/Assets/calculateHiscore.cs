@@ -2,18 +2,25 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class calculateHiscore : MonoBehaviour
 {
     public TMP_Text textValues, hiScore;
-    public AudioClip[] aClips;
     public AudioSource aS;
+    public AudioClip pointCountingLoop,loopLento,LoopLentissimo;
     public Animator anim;
     public GlobalVariableManager GVM;
+    public GameObject feC;
+    public RandomSpawn RS;
     string nuovoTesto;
     private void Awake()
     {
+        RS.StopCoroutine("SpawnaPeraACaso");
+
+        Cursor.visible = true;
+
         if (aS != null)
         {
 
@@ -73,11 +80,10 @@ public class calculateHiscore : MonoBehaviour
             intHiScore = GVM._SCORE * GVM._BULLETS;
         }
 
-        Debug.Log((3f / 4) * intHiScore);
-        Debug.Log((2f / 4) * intHiScore);
-        Debug.Log((1f / 4) * intHiScore);
-        Debug.Log((0.5f / 4) * intHiScore);
-        Debug.Log((0.25f / 4) * intHiScore);
+        aS.clip = pointCountingLoop;
+        aS.loop = true;
+        aS.Play();
+
         while (hiScore.text != intHiScore.ToString())
         {
             float txtVal = float.Parse(hiScore.text);
@@ -95,17 +101,21 @@ public class calculateHiscore : MonoBehaviour
                 txtVal += ((1f / 100) * intHiScore);
                 
             }
-            else if (txtVal < ((3.97f / 4) * intHiScore))
+            else if (txtVal < ((3.99f / 4) * intHiScore))
             {
                 txtVal += ((1f / 1000) * intHiScore);
                 
             }
-            else if (txtVal < ((3.99f / 4) * intHiScore))
+            else if (txtVal < ((3.999f / 4) * intHiScore))
             {
+                aS.clip = loopLento;
+                aS.Play();
                 txtVal += 1;
             }
             else
             {
+                aS.clip = LoopLentissimo;
+                aS.Play();
                 txtVal += 1;
                 yield return new WaitForSeconds(0.2f);
             }
@@ -118,6 +128,28 @@ public class calculateHiscore : MonoBehaviour
 
 
         }
-       
+
+        aS.loop = false;
+        aS.Stop();
+
+        anim.SetBool("AvviaFanfara", true);
+
+        StopCoroutine("CalcolaPunteggio");
+
+    }
+
+    public void FanfaraEConfetti()
+    {
+
+        feC.SetActive(true);
+
+    }
+
+    public void FaiUnSuono(AudioClip c)
+    {
+
+        aS.clip = c;
+        aS.Play();
+
     }
 }

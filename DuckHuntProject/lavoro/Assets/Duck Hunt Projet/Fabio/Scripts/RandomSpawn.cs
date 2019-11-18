@@ -46,7 +46,7 @@ public class RandomSpawn : MonoBehaviour
 
     }
 
-    void FermaSpawnaPapere()
+    public void FermaSpawnaPapere()
     {
 
         StopCoroutine("SpawnaPeraACaso");

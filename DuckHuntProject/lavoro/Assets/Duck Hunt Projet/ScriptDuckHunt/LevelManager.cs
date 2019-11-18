@@ -7,10 +7,47 @@ public class LevelManager : MonoBehaviour
     
     public GameObject canvasPlay;
     public GameObject canvasWin;
+    public GameObject canvasPausa;
     public Mirino mirino;
     public GlobalVariableManager GVM;
+    public bool isPaused = false;
+    private void Update()
+    {
+        if (canvasWin.activeSelf)
+        {
 
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                
+                isPaused = !isPaused;
+                if (isPaused)
+                {
+                    Cursor.visible = true;
+                    canvasPlay.SetActive(false);
+                    canvasPausa.SetActive(true);
+                    Time.timeScale = 0f;
+                }
+                else
+                {
+                    Resume();
+                }
 
+            }
+        }
+
+    }
+    public void Resume()
+    {
+        isPaused = false;
+        Cursor.visible = false; 
+        canvasPlay.SetActive(true);
+        canvasPausa.SetActive(false);
+        Time.timeScale = 1f;
+
+    }
     public void Awake()
     {
         //mirino = GameObject.Find("Mirino").GetComponent<Mirino>();

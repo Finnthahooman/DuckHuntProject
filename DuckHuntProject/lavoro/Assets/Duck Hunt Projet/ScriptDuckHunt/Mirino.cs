@@ -30,7 +30,8 @@ public class Mirino : MonoBehaviour
         cam = Camera.main;
     }
 
-    
+
+
     void FixedUpdate()
     {
         
@@ -83,6 +84,10 @@ public class Mirino : MonoBehaviour
 
     }
 
+    public void ToggleMouse()
+    {
+        Cursor.visible = !Cursor.visible;
+    }
     private void instantiateParticles(RaycastHit hit)
     {
 
