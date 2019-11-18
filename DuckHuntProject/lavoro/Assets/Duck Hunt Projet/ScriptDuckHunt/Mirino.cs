@@ -10,11 +10,16 @@ public class Mirino : MonoBehaviour
     const int scoreToWin = 100;
     public int numeroPapere = 20;
 
+    public AudioClip[] spari;
+    public AudioSource As;
+
     public Camera cam;
     public GameObject arma;
     public int maxDistance = 5;
     public int score = 0;
-    
+
+    public GameObject particleSys;
+
     public int bullets = 60;
  
     
@@ -36,7 +41,8 @@ public class Mirino : MonoBehaviour
        
            if (Input.GetMouseButtonDown(0))
            {
-          
+                As.clip = spari[Random.Range(0, spari.Length)];
+                As.Play();
                 bullets--;
                 RaycastHit hit;
                 if (Physics.Raycast(cam.transform.position, (worldPos - cam.transform.position).normalized, out hit, maxDistance))
@@ -45,6 +51,7 @@ public class Mirino : MonoBehaviour
 
                     if (hit.collider.gameObject.tag == "duck")
                     {
+                        instantiateParticles(hit);
                         Duck d = hit.collider.gameObject.GetComponent<Duck>();
                         
                         DanneggiaPapera(d, 1);
@@ -53,6 +60,7 @@ public class Mirino : MonoBehaviour
                     }
                     else if (hit.collider.gameObject.tag == "headShot")
                     {
+                        instantiateParticles(hit);
                         DuckHead h = hit.collider.gameObject.GetComponent<DuckHead>();
                         Duck d = h.owner;
                         if (d.vita == 2)
@@ -72,6 +80,15 @@ public class Mirino : MonoBehaviour
              
                 }
            }
+
+    }
+
+    private void instantiateParticles(RaycastHit hit)
+    {
+
+        particleSys.transform.position = hit.point;
+        ParticleSystem ps = particleSys.GetComponent<ParticleSystem>();
+        ps.Emit(5);
 
     }
 

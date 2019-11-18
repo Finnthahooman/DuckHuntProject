@@ -7,8 +7,8 @@ public class LevelManager : MonoBehaviour
     
     public GameObject canvasPlay;
     public GameObject canvasWin;
-    public GameObject canvasLose;
     public Mirino mirino;
+    public GlobalVariableManager GVM;
 
 
     public void Awake()
@@ -21,32 +21,36 @@ public class LevelManager : MonoBehaviour
         Debug.Log("faccio il check dei proiettili");
         if (mirino.score>=100)
         {
+            GVM._SCORE = mirino.score;
+            GVM._BULLETS = mirino.bullets;
             canvasPlay.SetActive(false);
             canvasWin.SetActive(true);
         }
-        else if (bullets <=0 && mirino.score<100)
+        else if (bullets <=0)
         {
+            GVM._SCORE = mirino.score;
+            GVM._BULLETS = mirino.bullets;
             canvasPlay.SetActive(false);
-            canvasLose.SetActive(true);
+            canvasWin.SetActive(true);
         }
 
     }
 
     public void DuckCheck()
     {
-        Debug.Log("faccio il check delle papere");
-        if (mirino.numeroPapere <=0 && mirino.score >= 100)
-        {
-            canvasPlay.SetActive(false);
-            canvasWin.SetActive(true);
-            mirino.gameObject.SetActive(false);
-        }
-        else if (mirino.numeroPapere <=0 && mirino.score < 100)
-        {
-            canvasPlay.SetActive(false);
-            canvasLose.SetActive(true);
-            mirino.gameObject.SetActive(false);
-        }
+        //Debug.Log("faccio il check delle papere");
+        //if (mirino.numeroPapere <=0 && mirino.score >= 100)
+        //{
+        //    canvasPlay.SetActive(false);
+        //    canvasWin.SetActive(true);
+        //    mirino.gameObject.SetActive(false);
+        //}
+        //else if (mirino.numeroPapere <=0 && mirino.score < 100)
+        //{
+        //    canvasPlay.SetActive(false);
+        //    canvasLose.SetActive(true);
+        //    mirino.gameObject.SetActive(false);
+        //}
     }
 }
 

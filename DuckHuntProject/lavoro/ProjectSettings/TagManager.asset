@@ -7,6 +7,7 @@ TagManager:
   - Duck
   - duck
   - headShot
+  - BOUND
   layers:
   - Default
   - TransparentFX
